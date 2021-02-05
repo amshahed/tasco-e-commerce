@@ -1,0 +1,145 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script>
+    $(document).on('change', '#post-form',function(e){
+        e.preventDefault();
+        $.ajax({
+            type:'POST',
+            url:'{% url "ajaxpost" %}',
+            data:{
+                size:$('#size').val(),
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                action: 'post'
+            },
+            data_type : 'html',
+            success: function (data) {
+                console.log("success");
+                $('#appendHere').html(data.rendered_table);
+            },
+            error: function (data) {
+                alert("Got an error dude " + data);
+            }
+        });
+    });
+</script>
+<div class="container pt-5">
+    <input type="text" class="form-control" id="xxx" placeholder="Title">
+    <form method="POST" id="post-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <select  class="form-control"  name="size" id="size">
+                {% for rs in size %}
+                    <option value="{{ rs.size_id }}">{{ rs.size.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <div class="row mb-2 posts">
+        {% for post in color %}
+            <div class="col-md-6">
+                <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <h3 class="mb-0">{{post.title}}</h3>
+                        <p class="mb-auto">{{post.color}}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+    <div id="appendHere">
+
+    </div>
+
+    <table id="dataTable">
+        <thead>
+        <tr>
+            <th>title</th>
+            <th>size</th>
+            <th>color</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for rs in color %}
+            <tr>
+                <td>{{ rs.title }}</td>
+                <td>{{ rs.size }}</td>
+                <td>{{ rs.color }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+</div>
+
+
+
+<ul class="category-list">
+    <li class="dropdown side-dropdown">
+        <a class ="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Clothes-Shoes-Accessories<i class="fa fa-angle-right"></i></a>
+        <div class="custom-menu">
+            <ul class="list-links">
+                <li><a href="#">Bags</a></li>
+                <li><a href="#">Shoes</a></li>
+                <li><a href="#">Women Accessories</a></li>
+                <li><a href="#">Women Clothes</a></li>
+            </ul>
+        </div>
+    </li>
+
+    <li class="dropdown side-dropdown">
+        <a class ="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Computers<i class="fa fa-angle-right"></i></a>
+        <div class="custom-menu">
+            <ul class="list-links">
+                <li><a href="#">Computer Accessories</a></li>
+                <li><a href="#">Desktop Computer</a></li>
+                <li><a href="#">Laptop Computers</a></li>
+            </ul>
+        </div>
+    </li>
+
+    <li class="dropdown side-dropdown">
+        <a class ="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Electronics<i class="fa fa-angle-right"></i></a>
+        <div class="custom-menu">
+            <ul class="list-links">
+                <li><a href="#">Mp3 Player</a></li>
+                <li><a href="#">Television</a></li>
+            </ul>
+        </div>
+    </li>
+
+    <li class="dropdown side-dropdown">
+        <a class ="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Furniture<i class="fa fa-angle-right"></i></a>
+        <div class="custom-menu">
+            <ul class="list-links">
+                <li><a href="#">Office Chairs</a></li>
+            </ul>
+        </div>
+    </li>
+
+    <li class="dropdown side-dropdown">
+        <a class ="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Phone<i class="fa fa-angle-right"></i></a>
+        <div class="custom-menu">
+            <ul class="list-links">
+                <li><a href="#">Desktop Phone</a></li>
+                <li><a href="#">Smart Phone</a></li>
+                <li><a href="#">Smart Phone Accessories</a></li>
+            </ul>
+        </div>
+    </li>
+
+
+</ul>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+{% load currency %}
+{% load static %}
+	<!-- HOME -->
+	<div id="home">
+		<!-- container -->
+		<div class="container">
+			<!-- home wrap -->
+			<div class="home-wrap">
+				<!-- home slick -->
+				<div id="home-slick">
+
+                    {% for rs in products_slider %}
+                    <!-- banner -->
+					<div class="banner banner-1">
+						<img src="{{ rs.image.url }}" alt="" style="height: 600px">
+
+						<h2 style="margin-top: 10px;">{{ rs.title }}</h2>
+						<h3 class="black-color font-weak" >{{ rs.price}} BDT </h3>
+						<div class="banner-caption text-center" style="margin-top: 300px;">
+							
+							<a href="{% url 'product_detail' rs.id rs.slug %}" class="primary-btn" style="border-radius: 4px;">Shop Now</a>
+
+						</div>
+						
+					</div>
+					<!-- /banner -->
+                    {% endfor %}
+
+				</div>
+				<!-- /home slick -->
+			</div>
+			<!-- /home wrap -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /HOME -->
