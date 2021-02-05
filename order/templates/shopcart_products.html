@@ -1,5 +1,4 @@
 {% extends 'homebase.html' %}
-{% load currency %}
 {% block title %} Shop Cart {% endblock %}
 {% block description %} {{ setting.description }} {% endblock %}
 {% block keywords %} {{ setting.keywords }} {% endblock %}
@@ -54,21 +53,13 @@
 
                                     </td>
                                     <td class="details">
-                                        <a href="/product/{{ rs.product.id }}/{{ rs.product.slug }}">{{rs.product}} {{ rs.variant.size }} {{ rs.variant.color }}</a>  </td>
+                                        <a href="/product/{{ rs.product.id }}/{{ rs.product.slug }}">{{rs.product}}</a>  </td>
                                     <td class="price text-center"><strong>
-                                        {% if rs.product.variant == 'None' %}
-                                            {{ rs.product.price|currency:request.session.currency }} {{ request.session.currency }}
-                                        {% else %}
-                                            {{ rs.variant.price|currency:request.session.currency }} {{ request.session.currency }}
-                                        {% endif %}
+                                        {{ rs.product.price }} BDT
                                     </strong></td>
                                     <td class="qty text-center"><strong>{{rs.quantity}}</strong></td>
                                     <td class="total text-center"><strong class="primary-color">$
-                                        {% if rs.product.variant == 'None' %}
-                                            {{ rs.amount|currency:request.session.currency }} {{ request.session.currency }}
-                                        {% else %}
-                                            {{ rs.varamount|currency:request.session.currency }} {{ request.session.currency }}
-                                        {% endif %}
+                                        {{ rs.amount }} BDT
                                     </strong></td>
                                     <td class="text-right"><a href="/order/deletefromcart/{{ rs.id }}" onclick="return confirm('Delete ! Are you sure?')" class="main-btn icon-btn"><i class="fa fa-close"></i></a></td>
                                 </tr>
@@ -80,7 +71,7 @@
                             <tr>
                                 <th class="empty" colspan="3"></th>
                                 <th>SUBTOTAL</th>
-                                <th colspan="2" class="sub-total">{{ total|currency:request.session.currency }} {{ request.session.currency }}</th>
+                                <th colspan="2" class="sub-total">{{ total }} BDT</th>
                             </tr>
                             <tr>
                                 <th class="empty" colspan="3"></th>
@@ -90,7 +81,7 @@
                             <tr>
                                 <th class="empty" colspan="3"></th>
                                 <th>TOTAL</th>
-                                <th colspan="2" class="total">{{ total|currency:request.session.currency }} {{ request.session.currency }}</th>
+                                <th colspan="2" class="total">{{ total }} BDT</th>
                             </tr>
                             </tfoot>
                         </table>
