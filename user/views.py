@@ -60,7 +60,6 @@ def signup_form(request):
             data.user_id=current_user.id
             data.image="images/users/user.png"
             data.save()
-            messages.success(request, 'Your account has been created!')
             return HttpResponseRedirect('/')
         else:
             messages.warning(request,form.errors)
@@ -106,15 +105,16 @@ def user_password(request):
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
             messages.success(request, 'Your password was successfully updated!')
-            return HttpResponseRedirect('/user')
+            return HttpResponseRedirect('/user/password')
         else:
-            messages.error(request, 'Please correct the error below.<br>'+ str(form.errors))
+            error_message = 'Please correct the error below.<br>'
+            for prop in form.errors:
+                error_message += prop + ': '+ form.errors[prop][0]+'<br>'
+            messages.error(request, error_message)
             return HttpResponseRedirect('/user/password')
     else:
-        #category = Category.objects.all()
         form = PasswordChangeForm(request.user)
-        return render(request, 'user_password.html', {'form': form,#'category': category
-                       })
+        return render(request, 'user_password.html', {'form': form})
 
 @login_required(login_url='/login') # Check login
 def user_orders(request):
