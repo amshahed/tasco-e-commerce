@@ -69,10 +69,6 @@ msgstr "Tüm Kategoriler"
 msgid "My Account"
 msgstr "Hesabım"
 
-#: .\home\templates\header.html:116 .\home\templates\header2.html:127
-msgid "My Favorits"
-msgstr "Favaorilerim"
-
 #: .\home\templates\header.html:117 .\home\templates\header2.html:128
 msgid "My Orders "
 msgstr "Satın Aldıklarım"
