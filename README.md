@@ -1,11 +1,10 @@
-
+# TASCO E-COMMERCE
 
 ## Installation of pre-requisites
 
 1. Python3.6, Python3.6-dev
 1. virtualenv
 1. PostgreSQL
-1. NodeJs 10
 
 If you have all the pre-requisites installed, skip this step and go to next step
 
@@ -32,16 +31,6 @@ psql --version
 
 # you can install pgadmin3 optionally to explore database
 sudo apt-get install pgadmin3
-```
-
-### Install NodeJS and npm
-
-```sh
-sudo apt-get update && sudo apt-get upgrade
-sudo apt-get install build-essential
-sudo apt-get install nodejs
-nodejs -v
-npm -v
 ```
 
 ## Setup PostgreSQL database
