@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'mptt',
     'currencies',
     'django.contrib.postgres',
+    'django_extensions',
 
 ]
 
